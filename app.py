@@ -23,8 +23,10 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
 
 @app.route('/')
 def home():
+    eventlet.sleep(5)
     while True:
         tm = localtime()
+        print(f'{tm.tm_hour}시 {tm.tm_min}분')
 
         if tm.tm_hour == 16 and 22 < tm.tm_min < 44:
             pass
@@ -57,8 +59,6 @@ def home():
             minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
 
             print(f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
-
-        eventlet.sleep(5)
 
 
 if __name__ == '__main__':
