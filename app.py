@@ -34,7 +34,7 @@ def home():
         else:
             while not(seoul_now.hour == 16 and 22 < seoul_now.minute < 44):
                 print('갇힘')
-                eventlet.sleep()
+                eventlet.sleep(10)
 
         arrprevstationcnt_list = []
         arrtime_list = []
