@@ -1,9 +1,14 @@
 import requests
 import xml.etree.ElementTree as ET
-from time import localtime
 from pushbullet import Pushbullet
 from flask import Flask
 import eventlet
+import datetime
+import pytz
+
+utc_now = datetime.datetime.utcnow()
+seoul_tz = pytz.timezone('Asia/Seoul')
+seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
 
 app = Flask(__name__)
 
@@ -23,15 +28,12 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
 
 @app.route('/')
 def home():
-    eventlet.sleep(5)
     while True:
-        tm = localtime()
-        print(f'{tm.tm_hour}시 {tm.tm_min}분')
-
-        if tm.tm_hour == 16 and 22 < tm.tm_min < 44:
+        print(seoul_now)
+        if seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
             pass
         else:
-            while tm.tm_hour == 16 and 22 < tm.tm_min < 44:
+            while seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
                 eventlet.sleep(600)
 
         arrprevstationcnt_list = []
@@ -59,6 +61,8 @@ def home():
             minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
 
             print(f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
+
+        eventlet.sleep(5)
 
 
 if __name__ == '__main__':
