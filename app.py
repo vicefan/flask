@@ -15,6 +15,7 @@ def home():
 
 @app.route('/bus')
 def bus():
+    global minutes1, seconds1
     url = 'http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList'
     params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZMOiQ6hlujRAJbCFm/NJoCvkJ1t/sJnw==',
               '_type': 'xml',
@@ -29,7 +30,7 @@ def bus():
         seoul_tz = pytz.timezone('Asia/Seoul')
         seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
 
-        if True: # seoul_now.hour == 16 and 22 < seoul_now.minute < 44
+        if True:  # seoul_now.hour == 16 and 22 < seoul_now.minute < 44
             arrprevstationcnt_list = []
             arrtime_list = []
 
@@ -53,10 +54,10 @@ def bus():
                 minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
                 print(f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
 
-            return render_template('home.html', minutes1=minutes1, seconds1=seconds1)
+            eventlet.sleep(10)
 
-        eventlet.sleep(10)
+            return render_template('home.html', minutes1=minutes1, seconds1=seconds1)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

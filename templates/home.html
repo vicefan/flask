@@ -2,9 +2,10 @@
 <html>
 <head>
     <title>Bus Arrival Time</title>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
 </head>
 <body>
     <h1>Bus Arrival Time</h1>
-    <p>Arrival time: {{ minutes1 }}분 {{ seconds1 }}초</p>
+    <p>Arrival time: <span id="arrival_time">{{ minutes1 }}분 {{ seconds1 }}초</span></p>
 </body>
 </html>
