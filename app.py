@@ -28,12 +28,12 @@ def home():
         utc_now = datetime.datetime.utcnow()
         seoul_tz = pytz.timezone('Asia/Seoul')
         seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
-        print(seoul_now)
+        print(f'{seoul_now.hour}시 {seoul_now.minute}분')
         if seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
             pass
         else:
             while seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
-                break
+                eventlet.sleep()
 
         arrprevstationcnt_list = []
         arrtime_list = []
