@@ -15,13 +15,14 @@ def home():
 
 @app.route('/bus')
 def bus():
-    url = 'http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll'
-    params = {
-        'ServiceKey': '인증키 입력',
-        'stId': '12345',  # 정류소 ID
-        'busRouteId': '123456789',  # 버스 노선 ID
-        'ord': '0'
-    }
+    url = 'http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList'
+    params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZMOiQ6hlujRAJbCFm/NJoCvkJ1t/sJnw==',
+              '_type': 'xml',
+              'pageNo': '1',
+              'numOfRows': '3',
+              'cityCode': '23',
+              'nodeId': 'ICB166000480',
+              'routeId': 'ICB165000026'}
 
     while True:
         utc_now = datetime.datetime.utcnow()
