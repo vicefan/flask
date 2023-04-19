@@ -19,6 +19,7 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
           'nodeId': 'ICB166000480',
           'routeId': 'ICB165000026'}
 
+
 @app.route('/')
 def home():
     while True:
@@ -48,10 +49,23 @@ def home():
             minutes1, seconds1 = divmod(int(arrtime_list[0]), 60)
             minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
 
-            push = pb.push_note("버스", f'{minutes1}분 {seconds1}초')
-            push = pb.push_note("버스", f'{minutes2}분 {seconds2}초')
+            push = pb.push_note("버스", f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
 
-        sleep(10)
+        if tm.tm_hour == 16 and tm.tm_min > 29:
+            sleep(5)
+        else:
+            sleep(600)
+            pushes = pb.get_pushes()
+
+            filtered_push = []
+
+            for push in pushes:
+                if push['title'] == '버스':
+                    filtered_push.append(push['iden'])
+
+            for push in filtered_push:
+                pb.delete_push(push)
+
 
 if __name__ == '__main__':
     app.run()
