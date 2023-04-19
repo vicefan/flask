@@ -30,10 +30,9 @@ def home():
         seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
         print(f'{seoul_now.hour}시 {seoul_now.minute}분')
         if seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
-            print('시간이 됨.')
+            ''
         else:
             while not(seoul_now.hour == 16 and 22 < seoul_now.minute < 44):
-                print('갇힘')
                 eventlet.sleep(10)
 
         arrprevstationcnt_list = []
