@@ -52,7 +52,7 @@ def home():
             push = pb.push_note("버스", f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
 
         if tm.tm_hour == 16 and 29 < tm.tm_min < 45:
-            sleep(10)
+            gevent.sleep(10)
             pushes = pb.get_pushes()
 
             filtered_push = []
@@ -66,7 +66,7 @@ def home():
         else:
             while tm.tm_hour == 16 and tm.tm_min == 20:
                 push = pb.push_note('잘', '되는중')
-                sleep(2)
+                gevent.sleep(2)
 
 
 if __name__ == '__main__':
