@@ -24,6 +24,7 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
 @app.route('/')
 def home():
     while True:
+        eventlet.sleep(5)
         tm = localtime()
 
         arrprevstationcnt_list = []
