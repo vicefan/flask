@@ -21,7 +21,7 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
           'routeId': 'ICB165000026'}
 
 
-@app.route('/')
+@app.before_first_request
 def home():
     while True:
         tm = localtime()
@@ -71,4 +71,5 @@ def home():
 
 
 if __name__ == '__main__':
+    app.before_first_request(home)
     app.run()
