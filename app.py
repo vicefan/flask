@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from time import localtime
 from pushbullet import Pushbullet
 from flask import Flask
-import gevent
+import eventlet
 
 app = Flask(__name__)
 
@@ -21,7 +21,7 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
           'routeId': 'ICB165000026'}
 
 
-@app.before_first_request
+@app.route('/')
 def home():
     while True:
         tm = localtime()
@@ -53,7 +53,7 @@ def home():
             push = pb.push_note("버스", f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
 
         if tm.tm_hour == 16 and 29 < tm.tm_min < 45:
-            gevent.sleep(10)
+            eventlet.sleep(10)
             pushes = pb.get_pushes()
 
             filtered_push = []
@@ -67,9 +67,8 @@ def home():
         else:
             while tm.tm_hour == 16 and tm.tm_min == 20:
                 push = pb.push_note('잘', '되는중')
-                gevent.sleep(2)
+                eventlet.sleep(5)
 
 
 if __name__ == '__main__':
-    app.before_first_request(home)
-    app.run()
+    eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)
