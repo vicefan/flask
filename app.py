@@ -32,7 +32,7 @@ def home():
         if seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
             pass
         else:
-            while seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
+            while not(seoul_now.hour == 16 and 22 < seoul_now.minute < 44):
                 eventlet.sleep()
 
         arrprevstationcnt_list = []
