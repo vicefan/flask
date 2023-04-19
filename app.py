@@ -6,10 +6,6 @@ import eventlet
 import datetime
 import pytz
 
-utc_now = datetime.datetime.utcnow()
-seoul_tz = pytz.timezone('Asia/Seoul')
-seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
-
 app = Flask(__name__)
 
 # Pushbullet API 토큰
@@ -29,6 +25,9 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
 @app.route('/')
 def home():
     while True:
+        utc_now = datetime.datetime.utcnow()
+        seoul_tz = pytz.timezone('Asia/Seoul')
+        seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
         print(seoul_now)
         if seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
             pass
@@ -62,7 +61,7 @@ def home():
 
             print(f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
 
-        eventlet.sleep(5)
+        eventlet.sleep(10)
 
 
 if __name__ == '__main__':
