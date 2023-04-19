@@ -27,6 +27,12 @@ def home():
     while True:
         tm = localtime()
 
+        if tm.tm_hour == 16 and 22 < tm.tm_min < 44:
+            pass
+        else:
+            while tm.tm_hour == 16 and 22 < tm.tm_min < 44:
+                eventlet.sleep(600)
+
         arrprevstationcnt_list = []
         arrtime_list = []
 
@@ -52,9 +58,6 @@ def home():
             minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
 
             print(f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
-
-        eventlet.sleep(5)
-
 
 
 if __name__ == '__main__':
