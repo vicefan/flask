@@ -23,8 +23,8 @@ params = {'serviceKey': 'ukqZ12eX9yPldvymYtMVnBuISYTZXiAMzQR5LaQwQBabEjekysM/TdZ
 
 @app.route('/')
 def home():
+    eventlet.sleep(5)
     while True:
-        eventlet.sleep(5)
         tm = localtime()
 
         arrprevstationcnt_list = []
@@ -40,35 +40,21 @@ def home():
             arrtime_list.append(arrtime)
 
         if len(arrtime_list) == 0:
-            push = pb.push_note("Bus", '버스 없음')
+            print('버스 없음')
 
         elif len(arrtime_list) == 1:
             minutes1, seconds1 = divmod(int(arrtime_list[0]), 60)
 
-            push = pb.push_note("버스", f'{minutes1}분 {seconds1}초')
+            print(f'{minutes1}분 {seconds1}초')
 
         elif len(arrtime_list) == 2:
             minutes1, seconds1 = divmod(int(arrtime_list[0]), 60)
             minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
 
-            push = pb.push_note("버스", f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
+            print(f'{minutes1}분 {seconds1}초 // {minutes2}분 {seconds2}초')
 
-        if tm.tm_hour == 16 and 29 < tm.tm_min < 45:
-            eventlet.sleep(10)
-            pushes = pb.get_pushes()
+        eventlet.sleep(5)
 
-            filtered_push = []
-
-            for push in pushes:
-                if push['title'] == '버스':
-                    filtered_push.append(push['iden'])
-
-            for push in filtered_push:
-                pb.delete_push(push)
-        else:
-            while tm.tm_hour == 16 and tm.tm_min == 20:
-                push = pb.push_note('잘', '되는중')
-                eventlet.sleep(5)
 
 
 if __name__ == '__main__':
