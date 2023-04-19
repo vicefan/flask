@@ -1,6 +1,6 @@
 import requests
 import xml.etree.ElementTree as ET
-from time import localtime, sleep
+from time import localtime
 from pushbullet import Pushbullet
 from flask import Flask
 import gevent
