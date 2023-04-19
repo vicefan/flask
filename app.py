@@ -28,7 +28,7 @@ def bus():
         seoul_tz = pytz.timezone('Asia/Seoul')
         seoul_now = utc_now.replace(tzinfo=pytz.utc).astimezone(seoul_tz)
 
-        if seoul_now.hour == 16 and 22 < seoul_now.minute < 44:
+        if True: # seoul_now.hour == 16 and 22 < seoul_now.minute < 44
             arrprevstationcnt_list = []
             arrtime_list = []
 
