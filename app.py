@@ -40,10 +40,14 @@ def bus():
 
             if len(arrtime_list) == 0:
                 print('버스 없음')
-                minutes1, seconds1 = 0, 0
+                minutes1, seconds1 = ('-', '-')
+                minutes2, seconds2 = ('-', '-')
+
             elif len(arrtime_list) == 1:
                 minutes1, seconds1 = divmod(int(arrtime_list[0]), 60)
                 print(f'{minutes1}분 {seconds1}초')
+                minutes2, seconds2 = ('-', '-')
+
             elif len(arrtime_list) == 2:
                 minutes1, seconds1 = divmod(int(arrtime_list[0]), 60)
                 minutes2, seconds2 = divmod(int(arrtime_list[1]), 60)
@@ -51,7 +55,7 @@ def bus():
 
             eventlet.sleep(10)
 
-            return render_template('home.html', minutes1=minutes1, seconds1=seconds1)
+            return render_template('home.html', minutes1=minutes1, seconds1=seconds1, minutes2=minutes2, seconds2=seconds2)
 
 
 if __name__ == '__main__':
