@@ -9,11 +9,6 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def home():
-    return render_template('home.html', minutes1=0, seconds1=0)
-
-
-@app.route('/bus')
 def bus():
     global minutes1, seconds1
     url = 'http://apis.data.go.kr/1613000/ArvlInfoInqireService/getSttnAcctoSpcifyRouteBusArvlPrearngeInfoList'
